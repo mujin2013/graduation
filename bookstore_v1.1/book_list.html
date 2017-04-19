@@ -5,9 +5,10 @@
 		<title>江南缘书城</title>
 		<link rel="stylesheet" href="./css/reset.css"/>
 		<link rel="stylesheet" href="./css/base.css"/>
+		<link rel="stylesheet" href="./css/cypager.min.css"/>
 		<link rel="stylesheet" href="./css/book_list.css"/>
 	</head>
-	<body>
+	<body ng-app="bookList">
 		<!-- 头部开始 -->
 		<header>
 			<div class="header-nav">
@@ -61,6 +62,137 @@
 
 		<!-- 书籍列表开始 -->
 		<section>
+			<div class="container" ng-controller="bookListCtrl">
+				<nav class="crumbs"><span>首页</span><i></i><span>教育</span></nav>
+				<div class="mainbox">
+					<ul class="clearfix">
+						<li><span style="background-image:url('./images/spotlight/s00001.jpg');background-size:cover;"></span></li>
+						<li><span style="background-image:url('./images/spotlight/s00002.jpg');background-size:cover;"></span></li>
+						<li><span style="background-image:url('./images/spotlight/s00003.jpg');background-size:cover;"></span></li>
+						<li><span style="background-image:url('./images/spotlight/s00004.jpg');background-size:cover;"></span></li>
+						<li><span style="background-image:url('./images/spotlight/s00005.jpg');background-size:cover;"></span></li>
+					</ul>
+					<div class="butBox">
+						<a class="butLeft">&lt;</a>
+						<a class="butRight">&gt;</a>
+					</div>
+					<h2>大家爱搜索</h2>
+				</div>
+				<div class="more-books">
+					<div class="select-condition">
+						<p class="classify">
+							<span>分类：</span>
+							<a class="all-books">全部</a>
+							<a>文学传记</a>
+							<a>青春文学</a>
+							<a>动漫</a>
+							<a>幽默</a>
+							<a>艺术摄影</a>
+							<a>偶像明星</a>
+						</p>
+						<p class="sort">
+							<span>排序：</span>
+							<a class="sort-default">默认</a>
+							<a class="book-price">价格</a>
+							<a class="book-pageView">浏览量</a>
+						</p>
+					</div>
+					<div>
+						<ul class="book-list clearfix edu-book-list">
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00001.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00002.jpg"/>
+									<i></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00003.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="page-area">
+				</div>
+			</div>
 		</section>
 		<!-- 书籍列表结束 -->
 
@@ -137,6 +269,8 @@
 		<!-- 页面底部结束-->
 		<script src="./js/jquery-1.12.3.js"></script>
 		<script src="./js/angular.js"></script>
+		<script src="./js/jquery.transit.js"></script>
+		<script src="./js/cypager.min.js"></script>
 		<script src="./app/base.js"></script>
 		<script src="./app/book_list.js"></script>
 	</body>

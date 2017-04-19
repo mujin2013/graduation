@@ -394,32 +394,31 @@ angular.module('merchantLogin-controller',[])
 	    	pg_call_fun:function(count){
 	    		//此处应到数据库中拿数据
 	    		console.log('当前要请求第'+count+'页');
+          //TODO 根据商家点击不同的数字显示不同的内容
 	    	}
 	    });
-	    //TODO 根据商家点击不同的数字显示不同的内容
+	   
 	  	/*-----与页面样式相关的功能函数结束------*/
   })
-    .controller('shopAdminCtrl', function($scope){
+    .controller('shopAdminCtrl', function($scope,$http){
   		/*----------基础数据设置开始--------------*/
-        //从数据库中取得相关信息
+        //从数据库中取得店铺相关信息
         $http({
             method:'GET',
-            url:'sel-sellectSeller.action?chose=CHOSE',
+            url:'shop-selectShop.action',
         }).success(function(data){
             console.log(data);
             console.log('我获得数据了');
-            /*
             $scope.user={
-                img:'./images/userImg.jpg',
-                name:'',
-                notice:'',
-                degree:2,
-                selectProvince:'请选择',
-                selectCity:'请选择',
-                selectRegi:'请选择',
-                street:''
+                img:data.shopImage,
+                name:data.shopName,
+                notice:data.notice,
+                degree:data.shopGrade,
+                selectProvince:data.province.provinceName,
+                selectCity:data.city.cityName,
+                selectRegi:data.county.countyName,
+                street:data.street
             };
-            */
            // console.log($scope.user);
         });
 
@@ -433,6 +432,7 @@ angular.module('merchantLogin-controller',[])
             selectRegi:'请选择',
 	  	    street:''
 	  	};
+
 	  	$scope.changeImgHint='成功了吗';
 	  	/*-----------基础的数据设置结束-----------*/
 	  	
@@ -564,8 +564,19 @@ angular.module('merchantLogin-controller',[])
             var html='';
             var i;
             var len;
+            var provinces;
             //TODO:从数据库中拿到省的信息
-            var provinces=['陕西1','陕西2','陕西3','陕西4','陕西5','陕西6','陕西7','陕西8','陕西9','陕西10','陕西11','陕西12','陕西13','陕西14'];
+            /*
+            $http({
+                method:'GET',
+                url:'shop-selectShop.action',
+            }).success(function(data){
+                console.log(data);
+                console.log('我获得数据了');
+
+            });
+            */
+            provinces=['陕西1','陕西2','陕西3','陕西4','陕西5','陕西6','陕西7','陕西8','陕西9','陕西10','陕西11','陕西12','陕西13','陕西14'];
             for(i=0,len=provinces.length;i<len;i++){
                 html+='<li>'+provinces[i]+'</li>'
             }
@@ -603,10 +614,10 @@ angular.module('merchantLogin-controller',[])
             selectInfo($('#all-regis'),"$('.mer-regi')",$('.mer-area-icon'));
         });
         /*------显示省市区信息结束-------*/
-  })
+    })
     .controller('dealSuccCtrl',function($scope){
 
-  })
-    .controller('dealingCtrl', function($scope){
+    })
+    .controller('dealingCtrl', function($scope) {
 
-  });
+    });
