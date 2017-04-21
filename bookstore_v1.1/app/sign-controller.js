@@ -69,9 +69,8 @@ angular.module('sign-controller',[])
               }).success(function(data){
                   console.log(data);
                    if(data=='yes'){
-                      //TODO   页面跳转到顾客登录页
-                      location.href="index_login.html";
-                      console.log("顾客登录成功！");
+                       console.log("顾客登录成功！");
+                       location.href="index_login.html";
                    }else{
                       //显示错误提示信息
                       //此处是用jquery实现
@@ -429,8 +428,8 @@ angular.module('sign-controller',[])
                 if($scope.isThrough[3]&&$scope.isThrough[4]&&$scope.isThrough[5]&&$scope.isThrough[6]){
                     console.log('顾客可以注册');
                     user.userName=$scope.regi.uname;
-                    user.userPassword=$scope.regi.uEmail;
-                    user.email=$scope.regi.pwd;
+                    user.userPassword=$scope.regi.pwd;
+                    user.email=$scope.regi.uEmail;
                     //将用户输入的信息拼接成查询字符串
                     $.each(user,function(key,value) {
                         postData+='user.'+key+'='+value+'&'
