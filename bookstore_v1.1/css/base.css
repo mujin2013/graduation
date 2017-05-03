@@ -85,6 +85,7 @@ header{
 	background:#fff;
 	border-radius: 3px;
 	padding-top:14px;
+	display:none;
 }
 .shop-book-list-box:before{
 	content:"";
@@ -493,7 +494,7 @@ footer{
 .user-bus,.aside-user-bus{
 	position:absolute;
 	top:36px;
-	left:-18px;
+	left:-23px;
 	width:100px;
 	height:175px;
 	border:#EEE solid 1px;
@@ -503,18 +504,28 @@ footer{
 	padding:5px 10px 0 10px;
 	display:none;
 }
+.user-bus:before,.aside-user-bus:before{
+	content:"";
+    position:absolute;
+    border-style:solid;
+    border-color:transparent transparent #EEE;
+    border-width:11px;
+    top:-21px;
+    right:38px;
+}
+.user-bus:after,.aside-user-bus:after{
+	content:"";
+    position:absolute;
+    border-style:solid;
+    border-color:transparent transparent #fff;
+    border-width:10px;
+    top:-17px;
+    right:38px;
+    z-index:9;
+}
 .aside-user-bus{
 	top:40px;
-	left:-28px;
-}
-.user-bus>p,.aside-user-bus>p{
-	position:absolute;
-	left:30px;
-	top:-24px;
-	display:block;
-	border-width:12px;
-	border-style:solid;
-	border-color:transparent transparent #FFF transparent;
+	left:-36px;
 }
 .user-bus>li,.aside-user-bus>li{
 	width:100%;

@@ -1,9 +1,0 @@
-angular.module('indexLogin',[])
-	.controller('loginHeaderCtrl',function($scope){
-		/*-----------获得基础数据开始-------------*/
-		$scope.user={
-			uname:'千里之外',
-			keywords:''
-		};
-		/*-----------获得基础数据结束-------------*/
-	});
