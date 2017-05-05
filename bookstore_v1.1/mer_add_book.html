@@ -24,28 +24,29 @@
 						<ul class="book-info-items">
 							<li>
 								<span>类别：</span>
-							<span>
-								<select class="book-cate-select">
-									<option data-id="0">--请选择--</option>
-									<option data-id="1">教育</option>
-									<option  data-id="2">小说</option>
-									<option data-id="3">文艺</option>
-									<option data-id="4">青春</option>
-									<option data-id="5">童书</option>
-									<option data-id="6">生活</option>
-									<option data-id="7">人文社科</option>
-									<option data-id="8">经管</option>
-									<option data-id="9">励志</option>
-									<option data-id="10">科技</option>
-									<option data-id="11">工具书</option>
-								</select>
-							</span>
-							<span>
-								<select class="book-smCate-select">
-									<option data-id="0">--请选择--</option>
-									<option ng-repeat="smCate in bookOtherInfo.smallCate" data-id={{smCate.categoryId}}>{{smCate.categoryName}}</option>
-								</select>
-							</span>
+								<span>
+									<select class="book-cate-select">
+										<option data-id="0">--请选择--</option>
+										<option data-id="1">教育</option>
+										<option  data-id="2">小说</option>
+										<option data-id="3">文艺</option>
+										<option data-id="4">青春</option>
+										<option data-id="5">童书</option>
+										<option data-id="6">生活</option>
+										<option data-id="7">人文社科</option>
+										<option data-id="8">经管</option>
+										<option data-id="9">励志</option>
+										<option data-id="10">科技</option>
+										<option data-id="11">工具书</option>
+									</select>
+								</span>
+								<span>
+									<select class="book-smCate-select">
+										<option data-id="0">--请选择--</option>
+										<option ng-repeat="smCate in bookOtherInfo.smallCate" data-id={{smCate.categoryId}}>{{smCate.categoryName}}</option>
+									</select>
+								</span>
+								<span><i class="book-add-hint cate-hint"></i></span>
 							</li>
 							<li>
 								<span>名称：</span>
@@ -110,7 +111,7 @@
 				</div>
 			</div>
 			<div class="add-book-operate container">
-				<span>保存</span><span>重置</span>
+				<span ng-click="saveNewBookInfo()">保存</span><span>取消</span>
 			</div>
 		</section>
 		<script src="./js/jquery-1.12.3.js"></script>
