@@ -164,3 +164,24 @@ header{
 	background:#ea6f5a;
 }
 /* 添加新书结束 */
+/*上传成功的提示开始*/
+.login-error-txt{
+	position:fixed;
+	top:20px;
+	left:500px;
+	text-align:center;
+	width:442px;
+	height:120px;
+	line-height:40px;
+	background:#E78170;
+	color:#FFF;
+	font-size:16px;
+	border-radius:5px;
+	padding:20px;
+	display:none;
+}
+.jump-time-hint{
+	font-size:24px;
+	margin-right:10px;
+}
+/*上传成功的提示结束*/

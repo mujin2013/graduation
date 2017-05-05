@@ -11,7 +11,7 @@
 			};
 		});
 	})
-	.controller('uploadCtrl',function($scope,$http){
+	.controller('uploadCtrl',function($scope,$http,$window,$interval){
 		//基本信息
 		$scope.book={
 		 	 bookName:'',
@@ -19,7 +19,7 @@
 			 author:'',
 			 publicationDate:'',
 			 publisher:'',
-			 recom:''
+			 oneWord:''
 		};
 		$scope.bookOtherInfo={
 			smallCate:'',
@@ -213,14 +213,45 @@
 				for(var key in $scope.book){
 					postData+='book.'+key+'='+$scope.book[key]+'&';
 				}
+				postData+='book.category.categoryId='+$scope.bookOtherInfo.smallCateId+'&book.summary='+$scope.bookOtherInfo.summeryUrl+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[0]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[1]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[2]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[3]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[4]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[5]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[6]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[7];
 				console.log(postData);
+				$http({
+					method:'POST',
+					url:'book-addBook.action',
+					data: postData,//已序列化用户输入的数据
+					headers:{ 'Content-Type': 'application/x-www-form-urlencoded' } //当POST请求时，必须添加的
+				}).success(function(data){
+					if(data.status=='yes'){
+						$('.login-error-txt').slideDown();
+						var totalTime;
+						var timer = $interval(function(){
+							totalTime=parseInt($('.jump-time-hint').html());
+							console.log(totalTime);
+							totalTime--;
+							$('.jump-time-hint').html(totalTime);
+							if(totalTime==0){
+								//清除定时器
+								$interval.cancel(timer);
+								//当倒计时完后，页面跳转到上架新书页
+								$window.location.href='http://localhost:8080/bookstore_v1.1/mer_add_book.html';
+								$('.login-error-txt').slideUp();
+							}
+						},1000);
+					}else{
+						console.log('保存失败，服务器有问题');
+					}
+					console.log(data);
+				});
 				console.log($scope.bookOtherInfo);
-
 			}else{
 				console.log('请仔细检查不能提交');
 			}
 
 		};
+		//取消添加新书
+		$scope.cancelAddBook=function(){
+			$window.location.href='http://localhost:8080/bookstore_v1.1/merchant_login.html#/bookAdmin';
+		}
 		//根据用户选择的书籍大类，来显示待选择的书籍子类
 		$(".book-cate-select").change(function () {
 			var selectId;
@@ -341,7 +372,7 @@
 					}
 					break;
 				case 'bookRecom':
-					inputInfo=$scope.book.recom;
+					inputInfo=$scope.book.oneWord;
 					if(inputInfo){
 						//当输入信息存在
 						if($scope.reg[2].test(inputInfo)){

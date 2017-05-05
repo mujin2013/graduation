@@ -15,7 +15,7 @@
 				<div class="container clearfix">
 				<span class="fl">好的生活，与书为伴</span>
 				<div class="fr">
-					<div class="user-box" style="display:none">
+					<div class="user-box already-user-box">
 						<span class="user-txt">花开半夏</span>
 						<ul class="user-bus">
 							<li><a href="customer_business.html#/custInfo">个人资料</a></li>
@@ -25,7 +25,7 @@
 							<li><a href="sign.html#/login">退出登录</a></li>
 						</ul>
 					</div>
-					<div class="user-not-login">
+					<div class="user-not-login not-already-user-box">
 						<span class="head-login login-txt">登录</span>
 						<span class="header-separate">|</span>
 						<span class="head-regist regist-txt">注册</span>
@@ -41,7 +41,7 @@
 					<div class="fr">
 						<input type="text" placeholder="请输入关键字进行搜索" ng-model="user.keywords" class="keywords-search"/>
 						<a class="search-icon" href="javascript:;"></a>
-						<div class="shopcar-icon" style="display:none">
+						<div class="shopcar-icon">
 							<a  href="javascript:;"></a>
 							<span class="shop-num">0<i></i></span>
 							<div class="shop-book-list-box shop-book-small-list-box"> 
@@ -114,7 +114,7 @@
 					<ul class="header-items clearfix">
 						<li><a href="javascript:;" class="cur-header-item">首页</a></li>
 						<li>
-							<a href="javascript:;">教育</a>
+							<a href="javascript:;" data-id="1">教育</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">教材</a></li>
@@ -125,7 +125,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">小说</a>
+							<a href="javascript:;" data-id="2">小说</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -142,7 +142,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">文艺</a>
+							<a href="javascript:;" data-id="3">文艺</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -156,7 +156,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">青春</a>
+							<a href="javascript:;" data-id="4">青春</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -170,11 +170,38 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">童书</a>
+							<a href="javascript:;" data-id="5">童书</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">7-10岁</a></li>
 									<li><a href="javascript:;">11-14岁</a></li>
+									<li><a href="javascript:;">儿童文学</a></li>
+									<li><a href="javascript:;">绘本</a></li>
+									<li><a href="javascript:;">科普</a></li>
+									<li><a href="javascript:;">幼儿启蒙</a></li>
+									<li><a href="javascript:;">手工游戏</a></li>
+									<li><a href="javascript:;">智力开发</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:;" data-id="6">生活</a>
+							<div class="book-subclass-box">
+								<ul class="container clearfix book-subclass-items">
+									<li><a href="javascript:;">0-2岁</a></li>
+									<li><a href="javascript:;">3-6岁</a></li>
+									<li><a href="javascript:;">7-10岁</a></li>
+									<li><a href="javascript:;">11-14岁</a></li>
+									<li><a href="javascript:;">幼儿启蒙</a></li>
+									<li><a href="javascript:;">手工游戏</a></li>
+									<li><a href="javascript:;">智力开发</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:;" data-id="7">人文社科</a>
+							<div class="book-subclass-box">
+								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">儿童文学</a></li>
 									<li><a href="javascript:;">绘本</a></li>
 									<li><a href="javascript:;">科普</a></li>
@@ -185,34 +212,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">生活</a>
-							<div class="book-subclass-box">
-								<ul class="container clearfix book-subclass-items">
-									<li><a href="javascript:;">0-2岁</a></li>
-									<li><a href="javascript:;">3-6岁</a></li>
-									<li><a href="javascript:;">7-10岁</a></li>
-									<li><a href="javascript:;">11-14岁</a></li>
-									<li><a href="javascript:;">幼儿启蒙</a></li>
-									<li><a href="javascript:;">手工游戏</a></li>
-									<li><a href="javascript:;">智力开发</a></li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<a href="javascript:;">人文社科</a>
-							<div class="book-subclass-box">
-								<ul class="container clearfix book-subclass-items">
-									<li><a href="javascript:;">儿童文学</a></li>
-									<li><a href="javascript:;">绘本</a></li>
-									<li><a href="javascript:;">科普</a></li>
-									<li><a href="javascript:;">幼儿启蒙</a></li>
-									<li><a href="javascript:;">手工游戏</a></li>
-									<li><a href="javascript:;">智力开发</a></li>
-								</ul>
-							</div>
-						</li>
-						<li>
-							<a href="javascript:;">经管</a>
+							<a href="javascript:;" data-id="8">经管</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -224,7 +224,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">励志</a>
+							<a href="javascript:;" data-id="9">励志</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -238,7 +238,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">科技</a>
+							<a href="javascript:;" data-id="10">科技</a>
 							<div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">计算机互联网</a></li>
@@ -253,7 +253,7 @@
 							</div>
 						</li>
 						<li>
-							<a href="javascript:;">工具书</a>
+							<a href="javascript:;" data-id="11">工具书</a>
 							<!-- <div class="book-subclass-box">
 								<ul class="container clearfix book-subclass-items">
 									<li><a href="javascript:;">0-2岁</a></li>
@@ -1242,7 +1242,7 @@
 							</div> -->
 						</li>
 				</ul>
-				<div class="aside-img-box fr" style="display:none">
+				<div class="aside-img-box already-login-aside-img-box fr" >
 					<div class="aside-user-box">
 						<span class="aside-user-img"></span>
 						<ul class="aside-user-bus">
@@ -1288,7 +1288,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="aside-img-box fr">
+				<div class="aside-img-box not-already-login-aside-img-box fr" style="display:none">
 					<p><a href="javascript:;" class="login-txt">登录</a><a>|</a><a href="javascript:;" class="regist-txt">注册</a></p>
 					<a href="javascript:;"></a>
 				</div>

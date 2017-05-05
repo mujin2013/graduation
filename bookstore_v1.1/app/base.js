@@ -18,6 +18,25 @@
 	$book_class.mouseenter(function(){
 		var bookClass=$(this).children()[0];
 		var bookSubclass=$(this).children()[1];
+		var bigCateId=$($(this).children()[0]).attr('data-id');
+		var curHtml;
+		//从数据库中获取该书籍大类的子类
+		$.ajax({
+			type: 'POST',
+			url: 'select-selectCategory.action',
+			data: 'category.categoryPId='+bigCateId,
+			success: function(data){
+				var html='';
+				console.log(data);
+				console.log(data.categories.length);
+				//用js动态创建书籍子类
+				/*for(var i=0;i<curSmCate.length;i++){
+					html+='<li><a href="javascript:;">'+curSmCate[i].categoryName+'</a></li>';
+				}
+				curHtml='<div class="aside-subclass-box"><ul class="container clearfix book-subclass-items">'+html+'</ul></div>';
+				console.log(curHtml);*/
+			}
+		});
 		$(bookSubclass).css('display','block');
 		$nav_items.removeClass("cur-header-item");
 		$(bookClass).addClass("cur-header-item");
@@ -88,4 +107,23 @@
 		location.href="sign.html#/register";
 	});
 	/*---与页面跳转相关的结束-----*/
+
+	/*----显示用户名开始--*/
+	var userIsLogin=sessionStorage.getItem('isLogin');
+	if(userIsLogin){
+		//当为真时，意味着用户已登录
+		$('.already-login-aside-img-box').css('display','block');
+		$('.already-user-box').css('display','block');
+		$('.shopcar-icon').css('display','inline-block');
+		$('.not-already-login-aside-img-box').css('display','none');
+		$('.not-already-user-box').css('display','none');
+	}else{
+		//当为假时，意味着用户未登录
+		$('.already-login-aside-img-box').css('display','none');
+		$('.already-user-box').css('display','none');
+		$('.shopcar-icon').css('display','none');
+		$('.not-already-login-aside-img-box').css('display','block');
+		$('.not-already-user-box').css('display','block');
+	}
+	/*----显示用户名结束--*/
 })();
