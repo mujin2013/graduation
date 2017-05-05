@@ -8,7 +8,7 @@
             url:'sel-sellectSeller.action?chose=CHOSE',
         }).success(function(data){
             $scope.mer={
-				name:data.selName
+				name:data.seller.selName
 			};
         });
 	})
@@ -26,6 +26,14 @@
 	      	 templateUrl:'./view/merchantLogin/dealing.html',
 	  	     controller:'dealingCtrl'
 	      })
+		   .when('/waitDealing',{
+			   templateUrl:'./view/merchantLogin/waitDealing.html',
+			   controller:'waitDealingCtrl'
+		   })
+		   .when('/waitSure',{
+			   templateUrl:'./view/merchantLogin/waitSure.html',
+			   controller:'waitSureCtrl'
+		   })
 	      .when('/bookAdmin',{
 	      	 templateUrl:'./view/merchantLogin/bookAdmin.html',
 	  	     controller:'bookAdminCtrl'

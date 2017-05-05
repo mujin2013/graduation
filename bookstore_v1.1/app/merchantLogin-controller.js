@@ -23,7 +23,7 @@ angular.module('merchantLogin-controller',[])
             console.log($scope.user);
         });
 
-
+        /*
 	  	$scope.user={
 	  	    img:'./images/userImg.jpg',
 	  	    name:'小布点儿',
@@ -35,8 +35,12 @@ angular.module('merchantLogin-controller',[])
 	  	    rePwd:'hzx121314?',
             keyId:'112'
 	  	};
-
-	  	$scope.changeImgHint='成功了吗';
+        */
+	  	$scope.changeImgHint='';
+        $scope.img={
+            name:'',
+            imgId:''
+        };
 	  	/*-----------基础的数据设置结束-----------*/
 	  	
 
@@ -45,9 +49,62 @@ angular.module('merchantLogin-controller',[])
   		// 改变头像---开始
 	  	//显示改变头像box
 	  	$scope.showChangeImg=function(){
-	  	  $scope.changeImgBox={
-	  	  	"display":"block"
-	  	  };
+	  	    $scope.changeImgBox={
+	  	  	    "display":"block"
+	  	    };
+            /*----------更换头像开始-------*/
+            //对所选择的图片做处理
+            var options={
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: $('.my-img>img').attr('src')
+            };
+            var cropper = $('.cust-img-box').cropbox(options);//调用图片上传插件的方法
+            $scope.changeImgHint='';
+            //实现图片的改变
+            $('#selImage').on('change', function(e){
+                $scope.img.name=$(this).attr('name');
+                $scope.img.imgId=$(this).attr('id');
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    options.imgSrc = e.target.result;
+                    cropper = $('.cust-img-box').cropbox(options);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            //放大图片
+            $('.bigger-img').on('click', function(){
+                cropper.zoomIn();//将图片放大
+            });
+            //缩小图片
+            $('.smaller-img').on('click', function(){
+                cropper.zoomOut();//将图片缩小
+            });
+
+            //给保存按钮加事件保存用户新的头像到数据库中
+            $scope.saveImg=function(){
+                //将用户新的头像保存到数据库中
+                //此处要根据后台给的反馈实时给用户提示
+                var subImg = cropper.getDataURL();
+                $('.my-img>img').attr('src',subImg);
+                $('.my-img>img').attr('ng-src',subImg);
+                $.ajaxFileUpload({
+                    url: "upLoad-addSelImage.action",// 文件上传服务器请求Action
+                    secureuri: true,// 安全提交，默认为false
+                    fileElementId: $scope.img.imgId,// 文件类型的id
+                    dataType: "text",// 返回值类型
+                    success: function (data) {// 服务器响应成功
+                        $scope.changeImgHint='上传成功！';
+                        $scope.$apply(); //传播Model的变化。
+                    },
+                    error: function (data) {// 服务器响应失败
+                        console.log('服务器有问题，请稍后再试');
+                        $scope.changeImgHint='服务器有问题，请稍后再试！';
+                        $scope.$apply(); //传播Model的变化。
+                    }
+                });
+            };
+            /*----------更换头像结束-------*/
 	  	};
 	  	//隐藏改变头像box
 	  	$scope.hideChangeImg=function(){
@@ -56,68 +113,7 @@ angular.module('merchantLogin-controller',[])
 	  	  };
 	  	};
 	 
-	  	//对所选择的图片做处理
-	  	var options={
-	  		 thumbBox: '.thumbBox',
-             spinner: '.spinner',
-             imgSrc: $scope.user.img
-	  	};
-	  	var cropper = $('.cust-img-box').cropbox(options);//调用图片上传插件的方法
-	  	//实现用户头像的更新
-	  	var subImg='';//裁剪后图片的url
-	  	var getImg=function(){
-	  		subImg = cropper.getDataURL();
-	  		$('.my-img>img').attr('src',subImg);
-	  	}
-	  	//实现图片的移动
-	  	$('#loadImg').on('change', function(){
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				options.imgSrc = e.target.result;
-				cropper = $('.cust-img-box').cropbox(options);
-			}
-			reader.readAsDataURL(this.files[0]);
-			getImg();
-		});
-		$('.bigger-img').on('click', function(){
-			cropper.zoomIn();//将图片放大
-		});
-		$('.smaller-img').on('click', function(){
-			cropper.zoomOut();//将图片缩小
-		});	
-		$(".cust-img-box").on("mouseup",function(){
- 			getImg();//鼠标移动时，实时更新用户头像
-  		});
 
-  		//给保存按钮加事件保存用户新的头像到数据库中
-  		$scope.saveImg=function(){
-  			//TODO 将用户新的头像保存到数据库中
-  			//TODO 此处要根据后台给的反馈实时给用户提示
-  			console.log("我要保存到数据库中了");
-            console.log(subImg);
-            /*
-            $http({
-                method:'POST',
-                url:'sel-sellectSeller.action?chose=CHOSE',
-            }).success(function(data){
-                console.log(data);
-                console.log('我获得数据了');
-                $scope.user={
-                    img:data.selImage,
-                    name:data.selName,
-                    age:data.selAge,
-                    sex:data.selSex,
-                    mail:data.selTel,
-                    id:data.selIdCard,
-                    pwd:data.selPassword,
-                    rePwd:data.selPassword,
-                    keyId:data.selId
-                };
-                console.log($scope.user);
-            });
-            */
-  		};
-	  	/*----------与更换头像相关的事件结束-------*/
 
 	  	/*-----保存商家信息开始--------*/
 	  	$scope.saveMerInfo=function(){
@@ -458,7 +454,7 @@ angular.module('merchantLogin-controller',[])
            // console.log($scope.user);
         });
 
-	  	$scope.user={
+	  	/*$scope.user={
             img:'./images/userImg.jpg',
 	  	    name:'',
 	  	    notice:'',
@@ -467,8 +463,12 @@ angular.module('merchantLogin-controller',[])
             selectCity:'请选择',
             selectRegi:'请选择',
 	  	    street:''
-	  	};
+	  	};*/
 	  	$scope.changeImgHint='成功了吗';
+        $scope.img={
+            name:'',
+            imgId:''
+        };
 	  	/*-----------基础的数据设置结束-----------*/
 	  	
 
@@ -480,6 +480,59 @@ angular.module('merchantLogin-controller',[])
 	  	    $scope.changeImgBox={
 	  	  	    "display":"block"
 	  	     };
+            /*更换头像开始*/
+            //对所选择的图片做处理
+            var options={
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: $('.my-img>img').attr('src')
+            };
+            var cropper = $('.cust-img-box').cropbox(options);//调用图片上传插件的方法
+            $scope.changeImgHint='';
+            //实现图片的改变
+            $('#selWeixin').on('change', function(e){
+                $scope.img.name=$(this).attr('name');
+                $scope.img.imgId=$(this).attr('id');
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    options.imgSrc = e.target.result;
+                    cropper = $('.cust-img-box').cropbox(options);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            //放大图片
+            $('.bigger-img').on('click', function(){
+                cropper.zoomIn();//将图片放大
+            });
+            //缩小图片
+            $('.smaller-img').on('click', function(){
+                cropper.zoomOut();//将图片缩小
+            });
+
+            //给保存按钮加事件保存用户新的头像到数据库中
+            $scope.saveImg=function(){
+                //将用户新的头像保存到数据库中
+                //此处要根据后台给的反馈实时给用户提示
+                var subImg = cropper.getDataURL();
+                $('.my-img>img').attr('src',subImg);
+                $('.my-img>img').attr('ng-src',subImg);
+                $.ajaxFileUpload({
+                    url: "upLoad-addSelWeiXin.action",// 文件上传服务器请求Action
+                    secureuri: true,// 安全提交，默认为false
+                    fileElementId: $scope.img.imgId,// 文件类型的id
+                    dataType: "text",// 返回值类型
+                    success: function (data) {// 服务器响应成功
+                        $scope.changeImgHint='上传成功！';
+                        $scope.$apply(); //传播Model的变化。
+                    },
+                    error: function (data) {// 服务器响应失败
+                        console.log('服务器有问题，请稍后再试');
+                        $scope.changeImgHint='服务器有问题，请稍后再试！';
+                        $scope.$apply(); //传播Model的变化。
+                    }
+                });
+            };
+            /*更换头像结束*/
 	  	};
 	  	//隐藏改变头像box
 	  	$scope.hideChangeImg=function(){
@@ -487,48 +540,6 @@ angular.module('merchantLogin-controller',[])
 	  	  	    "display":"none"
              };
 	  	};
-	 
-	  	//对所选择的图片做处理
-	  	var options={
-	  		 thumbBox: '.thumbBox',
-             spinner: '.spinner',
-             imgSrc: $scope.user.img
-	  	};
-	  	var cropper = $('.cust-img-box').cropbox(options);//调用图片上传插件的方法
-	  	//实现用户头像的更新
-	  	var subImg='';//裁剪后图片的url
-	  	var getImg=function(){
-	  		subImg = cropper.getDataURL();
-	  		$('.my-img>img').attr('src',subImg);
-	  	}
-	  	//实现图片的移动
-	  	$('#loadImg').on('change', function(){
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				options.imgSrc = e.target.result;
-				cropper = $('.cust-img-box').cropbox(options);
-			}
-			reader.readAsDataURL(this.files[0]);
-			getImg();
-		});
-		$('.bigger-img').on('click', function(){
-			cropper.zoomIn();//将图片放大
-		});
-		$('.smaller-img').on('click', function(){
-			cropper.zoomOut();//将图片缩小
-		});	
-		$(".cust-img-box").on("mouseup",function(){
- 			getImg();//鼠标移动时，实时更新用户头像
-  		});
-
-  		//给保存按钮加事件保存用户新的头像到数据库中
-  		$scope.saveImg=function(){
-  			//TODO 将用户新的头像保存到数据库中
-  			//TODO 此处要根据后台给的反馈实时给用户提示
-  			alert("我要保存到数据库中了");
-  		};
-	  	/*----------与更换头像相关的事件结束-------*/
-
 	  	/*-----保存商家信息开始--------*/
 	  	$scope.saveMerInfo=function(){
             var postData='',
@@ -746,4 +757,10 @@ angular.module('merchantLogin-controller',[])
     .controller('dealSuccCtrl',function($scope){
     })
     .controller('dealingCtrl', function($scope) {
+    })
+    .controller('waitDealingCtrl',function($scope){
+
+    })
+    .controller('waitSureCtrl',function($scope){
+
     });
