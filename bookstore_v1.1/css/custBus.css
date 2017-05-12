@@ -141,6 +141,9 @@
 .custBus-items>li:hover{
 	color:#B4A078;
 }
+.highlight-oper{
+	color:#B4A078 !important;
+}
 /*更换头像开始*/
 .cust-box-addi{
 	position:fixed;
@@ -232,7 +235,7 @@
 	overflow:hidden;
 	border-radius:4px;
 }
-#loadImg{
+#userImage{
 	position:absolute;
 	top:-20px;
 	left:-20px;
@@ -262,6 +265,7 @@
 	margin-top:8px;
 	color:#E48A78;
 	text-align:center;
+	display:none;
 }
 /*更换头像结束*/
 /*左边栏结束*/

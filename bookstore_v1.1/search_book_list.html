@@ -5,9 +5,10 @@
 		<title>江南缘书城</title>
 		<link rel="stylesheet" href="./css/reset.css"/>
 		<link rel="stylesheet" href="./css/base.css"/>
-		<link rel="stylesheet" href="./css/submit_order.css"/>
+		<link rel="stylesheet" href="./css/cypager.min.css"/>
+		<link rel="stylesheet" href="./css/search_book_list.css"/>
 	</head>
-	<body>
+	<body ng-app="bookList">
 		<!-- 头部开始 -->
 		<header>
 			<div class="header-nav">
@@ -289,175 +290,110 @@
 			-->
 		</header>
 		<!-- 头部结束 -->
-		
-		<!-- 提交订单页面开始（已有地址、选择某个地址作为默认地址、新建或修改地址都有写） -->
-		<section ng-app="submitOrder">
-			<div class="container">
-				<div class="submit-order-box">
-					<div class="select-addr-box" ng-controller="selectAddrCtrl">
-						<p>收货信息</p>
-						<div class="clearfix">
-							<div class="user-addr-info fl">
-								<p class="user-addr-default"><i></i>默认地址<span ng-click="editMyAddr()">修改</span></p>
-								<p><i>收货人：</i><span>{{userAddr.name}}</span></p>
-								<p><i>联系方式：</i><span>{{userAddr.tel}}</span></p>
-								<p><i>收货地址：</i><span>{{userAddr.addrDetail}}</span></p>
-							</div>
-							<div class="user-addr-operate fr">
-								<p ng-click="changeMyAddr()">切换地址</p>
-								<p ng-click="addNewAddr()">新建地址</p>
-							</div>
-						</div>
-					</div>
-					<div class="edit-addr-box" ng-controller="editAddrCtrl">
-						<p></p>
-						<div class="clearfix">
-							<div class="edit-addr fl">
-								<ul class="input-addr clearfix">
-									<li class="mer_position">
-										<span>所在地区：</span>
-										<div class="area-box">
-											<div class="province-box">
-												<div id="display-pro"><input type="text" ng-model="userEditAddr.selectProvince" data-id="{{ userEditAddr.provinceId }}" readonly="true" class="mer-province"/><i class="mer-pro-icon"></i></div>
-												<ul id="all-provinces">
-													<!--此处用js生成省的信息-->
-												</ul>
-											</div>
-											<div class="city-box">
-												<div id="display-city"><input type="text" ng-model="userEditAddr.selectCity" data-id="{{ userEditAddr.cityId }}" readonly="true" class="mer-city"/><i class="mer-city-icon"></i></div>
-												<ul id="all-citys">
-													<!--此处用js生成市信息-->
-												</ul>
-											</div>
-											<div class="regi-box">
-												<div id="display-regi"><input type="text" ng-model="userEditAddr.selectRegi" data-id="{{ userEditAddr.countyId }}" readonly="true" class="mer-regi"/><i class="mer-area-icon"></i></div>
-												<ul id="all-regis">
-													<!--此处用js生成区信息-->
-												</ul>
-											</div>
-										</div>
-									</li>
-									<li class="mer-detail-addr"><span>详细地址：</span><textarea ng-model="userEditAddr.street" placeholder="街道、门牌号等" class="user-input"></textarea></li>
-									<li class="clearfix">
-										<p class="user-name fl"><span>收货人：</span><input type="text" placeholder="请输入您的姓名" ng-model="userEditAddr.name"/></p>
-										<p class="user-tel fl"><span>手机号:</span><input type="text" placeholder="请输入您的手机号" ng-model="userEditAddr.tel"/></p>
-									</li>
-								</ul>
-							</div>
-							<div class="select-defalut fr">
-								<p><input type="checkbox" id="defaultAddr" ng-model="userEditAddr.def"/><label for="defaultAddr">设为默认</label></p>
-								<p><span ng-click="saveEditAddr()" data-id="{{userEditAddr.addressId}}">确定</span><span ng-click="cancelEditAddr()">取消</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="new-addr-box" ng-controller="newAddrCtrl">
-						<p></p>
-						<div class="clearfix">
-							<div class="edit-addr fl">
-								<ul class="input-addr clearfix">
-									<li class="mer_position">
-										<span>所在地区：</span>
-										<div class="area-box">
-											<div class="province-box">
-												<div id="display-pro-new"><input type="text" ng-model="userNewAddr.selectProvince" data-id="{{ userNewAddr.provinceId }}" readonly="true" class="mer-province" placeholder="点击选择省"/><i class="mer-pro-icon"></i></div>
-												<ul id="all-provinces-new">
-													<!--此处用js生成省的信息-->
-												</ul>
-											</div>
-											<div class="city-box">
-												<div id="display-city-new"><input type="text" ng-model="userNewAddr.selectCity" data-id="{{ userNewAddr.cityId }}" readonly="true" class="mer-city" placeholder="点击选择市"/><i class="mer-city-icon"></i></div>
-												<ul id="all-citys-new">
-													<!--此处用js生成市信息-->
-												</ul>
-											</div>
-											<div class="regi-box">
-												<div id="display-regi-new"><input type="text" ng-model="userNewAddr.selectRegi" data-id="{{ userNewAddr.countyId }}" readonly="true" class="mer-regi" placeholder="点击选择区"/><i class="mer-area-icon"></i></div>
-												<ul id="all-regis-new">
-													<!--此处用js生成区信息-->
-												</ul>
-											</div>
-										</div>
-									</li>
-									<li class="mer-detail-addr"><span>详细地址：</span><textarea ng-model="userNewAddr.street" placeholder="街道、门牌号等" class="user-input"></textarea></li>
-									<li class="clearfix">
-										<p class="user-name fl"><span>收货人：</span><input type="text" placeholder="请输入您的姓名" ng-model="userNewAddr.name"/></p>
-										<p class="user-tel fl"><span>手机号:</span><input type="text" placeholder="请输入您的手机号" ng-model="userNewAddr.tel"/></p>
-									</li>
-								</ul>
-							</div>
-							<div class="select-defalut fr">
-								<p><input type="checkbox" id="defaultAddr" ng-model="userNewAddr.def"/><label for="defaultAddr">设为默认</label></p>
-								<p><span ng-click="saveNewAddr()">确定</span><span ng-click="cancelNewAddr()">取消</span></p>
-							</div>
-						</div>
-					</div>
-					<div class="addr-as-default" ng-controller="addrAsDefaultCtrl">
-						<div class="wait-select-box">
-							<p>选择地址</p>
-							<ul class="wait-addrs" repeat-id="r1">
-								<li ng-repeat="userPerAddr in userAddrLists track by $index" on-repeat-finished-render ng-click="highlightAddrDefault($index)" data-id="{{userPerAddr.addressId}}">
-									<p class="obtain-person"><span>收货人：</span><span>{{userPerAddr.userName}}</span></p>
-									<p><span>联系方式：</span><span>{{userPerAddr.tel}}</span></p>
-									<p><span>收货地址：</span><span>{{userPerAddr.addrDetail}}</span></p>
-									<b class="default-addr-mark"></b>
-								</li>
-								<!--<li class="highlight-select-addr">
-									<p class="obtain-person"><span>收货人：</span><span>哈哈哈哈</span></p>
-									<p><span>联系方式：</span><span>13819242249</span></p>
-									<p><span>收货地址：</span><span>陕西省西安市长安区西安邮电大学南校区西区</span></p>
-									<b class="default-addr-mark">默认地址</b>
-								</li>-->
-							</ul>
-							<p class="select-default-operate"><span ng-click="saveDefaultAddr()">确认</span><span ng-click="cancalSaveDefaultAddr()">取消</span></p>
-							<i class="close-wait-addr"></i>
-						</div>
-					</div>
-					<div class="user-order-info" ng-controller="userBookInfoCtrl">
-						<div class="buy-book-info">
-							<table class="dealSucc-info-box">
-								<thead>
-									<tr class="dealSucc-title">
-										<th colspan="2">书籍信息</th>
-										<th>单价</th>
-										<th>数量</th>
-										<th>小计</th>
-									</tr>
-								</thead>
-								<tbody class="dealSucc-content">
-									<tr ng-repeat="book in userBooks track by $index">
-										<td class="book-img" style="background-image: url({{book.imgUrl}})"></td>
-										<td class="book-name">{{book.bookName}}</td>
-										<td>{{book.bookPrice}}</td>
-										<td>{{book.quantity}}</td>
-										<td>{{book.itemMoney}}</td>
-									</tr>
-									<!--<tr>
-										<td class="book-img" style="background-image: url('./images/index/e00001.jpg')"></td>
-										<td class="book-name">三生花三生三世三生十里桃花</td>
-										<td>12</td>
-										<td>1</td>
-										<td>12</td>
-									</tr>-->
-								</tbody>
-							</table>
-						</div>
-						<div class="payment-num">
-							<div>
-								<p class="book-total">书籍合计：<span>￥{{order.totalMoney}}</span></p>
-								<p class="book-transit-money"><span>全场包邮<i></i></span>运费:<span>￥0.0</span></p>
-							</div>
-							<div>
-								<p class="virtual-book-total">应付总额：<span>￥{{order.totalShouldPay}}</span></p>
-								<p class="payment-money"><span ng-click="goPay()">去付款</span></p>
-							</div>
-						</div>
+
+		<!-- 书籍列表开始 -->
+		<section>
+			<div class="container" ng-controller="bookListCtrl">
+				<div class="more-books">
+					<div>
+						<ul class="book-list clearfix edu-book-list">
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00001.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00002.jpg"/>
+									<i></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00003.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<img src="images/index/y00004.jpg"/>
+									<i class="good-book"></i>
+								</a>
+								<div class="book-sell-info">
+									<p class="recom-txt">关于爱、勇气和忠诚的故事，它讲述一位年轻人终于在这世界上找到了自己的一席之地。</p>
+									<h4>追风筝的人</h4>
+									<span>￥23.5</span>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
-				<p class="oper-hint"></p>
+				<div class="page-area">
+				</div>
 			</div>
 		</section>
-		<!-- 提交订单页面结束 -->
-		
+		<!-- 书籍列表结束 -->
+
 		<!-- 页面滚动时的固定定位部分开始 -->
 		<aside>
 			<div class="container clearfix">
@@ -712,9 +648,10 @@
 		<!-- 页面底部结束-->
 		<script src="./js/jquery-1.12.3.js"></script>
 		<script src="./js/angular.js"></script>
-		<script src="./js/slider.js"></script>
+		<script src="./js/jquery.transit.js"></script>
+		<script src="./js/cypager.min.js"></script>
 		<script src="./app/base.js"></script>
-		<script src="./app/base-controller.js"></script>
-		<script src="./app/submit_order.js"></script>
+		<script src="./app/getBaseData.js"></script>
+		<script src="./app/search_book_list.js"></script>
 	</body>
 </html>

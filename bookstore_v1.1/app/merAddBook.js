@@ -32,7 +32,7 @@
 			textHint:'点击添加',
 			isAdd:false
 		};
-		$scope.reg=[/^\d{1,}$/, /^((((19|20)\d{2})-(0?(1|[3-9])|1[012])-(0?[1-9]|[12]\d|30))|(((19|20)\d{2})-(0?[13578]|1[02])-31)|(((19|20)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))-0?2-29))$/,/^.{30,100}$/];
+		$scope.reg=[/^((([1-9]{1}\d{0,9}))|([0]{1}))((\.(\d){2}))?$/, /^((((19|20)\d{2})-(0?(1|[3-9])|1[012])-(0?[1-9]|[12]\d|30))|(((19|20)\d{2})-(0?[13578]|1[02])-31)|(((19|20)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|((((19|20)([13579][26]|[2468][048]|0[48]))|(2000))-0?2-29))$/,/^.{30,100}$/];
 		$scope.verTrue=[false,false,false,false,false,false,false,false,false];
 		//提示用户是否已添加过书籍详情
 		if(window.location.search){
@@ -125,14 +125,14 @@
 				var reData=JSON.parse(response);
 				$scope.bookOtherInfo.imgsUrl=reData.imagesURL;
 				console.log($scope.bookOtherInfo.imgsUrl);
-				if($scope.bookOtherInfo.imgsUrl.length==8){
+				if($scope.bookOtherInfo.imgsUrl.length==9){
 					$scope.verTrue[7]=true;
 					$('.img-hint').css('display','none');
 					$('.upload_choose').css('display','none');
 					$('.upload_submit').css('display','none');
 				}else{
 					$scope.verTrue[7]=false;
-					$('.img-hint').html('请只上传8张图片');
+					$('.img-hint').html('请只上传9张图片');
 					$('.img-hint').css('display','inline-block');
 					$('.upload_choose').css('display','block');
 					$('.upload_submit').css('display','inline-block');
@@ -163,6 +163,15 @@
 			console.log('我被点击了');
 			var isSubmit=true;
 			var postData='';
+			if($scope.book.publicationDate){
+				$scope.verTrue[3]=true;
+				$('.time-hint').css('display','none');
+			}else{
+				//当输入信息为空
+				$('.time-hint').html('出版日期不能为空！');
+				$('.time-hint').css('display','inline-block');
+				$scope.verTrue[3]=false;
+			}
 			for(var i=0;i<$scope.verTrue.length;i++){
 				if($scope.verTrue[i]!=true){
 					console.log(i);
@@ -197,7 +206,7 @@
 							$('.recom-hint').css('display','inline-block');
 							break;
 						case 7:
-							$('.img-hint').html('需要8张图片');
+							$('.img-hint').html('需要9张图片');
 							$('.img-hint').css('display','inline-block');
 							break;
 						case 8:
@@ -213,7 +222,7 @@
 				for(var key in $scope.book){
 					postData+='book.'+key+'='+$scope.book[key]+'&';
 				}
-				postData+='book.category.categoryId='+$scope.bookOtherInfo.smallCateId+'&book.summary='+$scope.bookOtherInfo.summeryUrl+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[0]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[1]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[2]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[3]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[4]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[5]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[6]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[7];
+				postData+='book.category.categoryId='+$scope.bookOtherInfo.smallCateId+'&book.summary='+$scope.bookOtherInfo.summeryUrl+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[0]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[1]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[2]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[3]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[4]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[5]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[6]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[7]+'&bookImages.imageURL='+$scope.bookOtherInfo.imgsUrl[8];
 				console.log(postData);
 				$http({
 					method:'POST',
@@ -265,6 +274,7 @@
 					data: 'category.categoryPId='+selectId,//已序列化用户输入的数据
 					headers:{ 'Content-Type': 'application/x-www-form-urlencoded' } //当POST请求时，必须添加的
 				}).success(function(data){
+					console.log(data);
 					$scope.bookOtherInfo.smallCate=data.categories;
 					$('.book-smCate-select').css('display','inline-block');
 					console.log($scope.bookOtherInfo.smallCate);
@@ -317,7 +327,7 @@
 							$('.price-hint').css('display','none');
 						}else{
 							//当格式不符合要求
-							$('.price-hint').html('价格应为数字！');
+							$('.price-hint').html('价格格式不正确！');
 							$('.price-hint').css('display','inline-block');
 							$scope.verTrue[1]=false;
 						}
@@ -340,7 +350,8 @@
 					}
 					break;
 				case 'bookTime':
-					inputInfo=$scope.book.publicationDate;
+					/*inputInfo=$scope.book.publicationDate;
+					console.log($scope.book.publicationDate);
 					if(inputInfo){
 						//当输入信息存在
 						if($scope.reg[1].test(inputInfo)){
@@ -358,7 +369,7 @@
 						$('.time-hint').html('出版日期不能为空！');
 						$('.time-hint').css('display','inline-block');
 						$scope.verTrue[3]=false;
-					}
+					}*/
 					break;
 				case 'bookPublisher':
 					inputInfo=$scope.book.publisher;
@@ -394,7 +405,11 @@
 					break;
 			}
 		});
-
+		//此处用jquery实现输入框获得焦点时，显示日历--开始
+		$('#cust-info-birth').datepicker({
+			dateFormat : 'yy-mm-dd',
+			showOtherMonths : true
+		});
 		/*-------基础功能函数结束----------*/
 	});
 })();

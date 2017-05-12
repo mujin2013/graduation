@@ -118,23 +118,19 @@ angular.module('admin',['ngRoute','admin-controller'])
 			})
 			.when('/accessShop',{
 				templateUrl:'view/admin/accessShop.html',
-				//controller:'accessShopCtrl'
+				controller:'accessShopCtrl'
 			})
 			.when('/accessBook',{
 				templateUrl:'view/admin/accessBook.html',
-				//controller:'accessBookCtrl'
+				controller:'accessBookCtrl'
 			})
 			.when('/editSmCate',{
 				templateUrl:'view/admin/editSmCate.html',
-				//controller:'editSmCateCtrl'
+				controller:'editSmCateCtrl'
 			})
 			.when('/addSmCate',{
 				templateUrl:'view/admin/addSmCate.html',
-				//controller:'addSmCateCtrl'
-			})
-			.when('/deleteSmCate',{
-				templateUrl:'view/admin/deleteSmCate.html',
-				//controller:'deleteSmCateCtrl'
+				controller:'addSmCateCtrl'
 			})
 			.when('/welcome',{
 				templateUrl:'view/admin/welcome.html',

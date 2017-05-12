@@ -1,5 +1,6 @@
 <div>
-  <ul class="cust-info-box">
+	<p class="oper-hint"></p>
+    <ul class="cust-info-box">
   	<li>
 		<span class="cust-info-title">用户ID：</span>
 		<span>{{ cust.id }}</span>
@@ -16,17 +17,31 @@
 		<label for="custFemale">女</label>
 	</li>
 	<li>
-		<span class="cust-info-title">手机号：</span>
-		<span>{{ cust.tel }}</span>
-		<span class="cust-change-tel" ng-click="changeTel()">更换号码</span>
+		<span class="cust-info-title">邮箱：</span>
+		<span>{{ cust.tel}}</span>
+		<span class="cust-change-tel" ng-click="changeTel()">更换邮箱号</span>
 	</li>
 	<li>
-	  <span class="cust-info-title">出生日期：</span><input type="text" id="cust-info-birth" ng-model="cust.birth" />
+	  <span class="cust-info-title">年龄：</span><input type="text" id="cust-info-birth" ng-model="cust.Age" />
 	</li>
 	<li><span id="cust-info-save" ng-click="saveInfo()">保存</span></li>
   </ul>
 </div>
 <style type="text/css">
+	.oper-hint{
+		position:fixed;
+		top:5px;
+		left:550px;
+		width:300px;
+		height:40px;
+		line-height:40px;
+		color:#FFF;
+		background-color:#E78170;
+		text-align:center;
+		border-radius:3px;
+		z-index:9999999;
+		display:none;
+	}
   .cust-info-box{
   	padding:33px 44px;
     height:480px;

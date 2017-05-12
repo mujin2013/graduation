@@ -3,25 +3,6 @@ section{
 	width:100%;
 	min-height: 500px;
 }
-.crumbs{
-	margin-bottom: 20px;
-}
-.crumbs >i{
-	position: relative;
-	top:2px;
-	display: inline-block;
-	width:16px;
-	height:16px;
-	background:url("../images/rArrow-s.png") center center no-repeat;
-	margin:0 5px;
-}
-.crumbs>span{
-	cursor:pointer;
-}
-.crumbs>span:last-child{
-	color:#999;
-	cursor:default;
-}
 /* 多图旋转轮播图开始 */
 .mainbox{
 	width:100%;
@@ -88,28 +69,43 @@ section{
 .more-books{
 	margin-top:30px;
 }
+.new-book-title{
+	width:100%;
+	height:60px;
+	line-height: 60px;
+	text-align: center;
+}
+.new-book-title>span:first-child{
+	font-size:24px;
+	font-weight:700;
+	margin-right:14px;
+}
+.new-book-title>span:last-child{
+	font-size:14px;
+	color:#999;
+}
 .select-condition{
 	font-size: 14px;
 	line-height: 60px;
 	margin-bottom:24px;
+	border-bottom: #DDD solid 1px;
 }
 .classify{
-	border-bottom:#DDD dashed 1px;
+	display:inline-block;
 	padding-left:4px;
 }
 .sort{
-	border-bottom:#DDD solid 1px;
-	padding-left:4px;
+	display: inline-block;
+	padding-right:4px;
 }
-.select-condition span{
+.classify span,.sort span{
 	display: inline-block;
 	width:42px;
 	height:100%;
-	margin-right:22px;
 	color:#999;
 }
 .select-condition a{
-	padding:0 10px;
+	padding:0 8px;
 	text-align: center;
 	cursor:pointer;
 	color:#000;
@@ -117,22 +113,11 @@ section{
 .select-condition a:hover{
 	color:#b4a078;
 }
-.cate-default,.sort-default{
+.all-books,.sort-default{
 	color:#b4a078 !important;
 }
-.book-price,.book-pageView{
-	padding:20px !important;
-}
-.price-to-high{
-	background:url("../images/toUp.png") right center no-repeat;
-}
-.price-to-low{
-	background:url("../images/toDown.png") right center no-repeat;
-}
-.view-to-high{
-	background:url("../images/toUp.png") right center no-repeat;
-}
-.view-to-low{
+.book-price{
+	padding-right:20px !important;
 	background:url("../images/toDown.png") right center no-repeat;
 }
 /*书籍展示开始*/

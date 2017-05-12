@@ -6,12 +6,12 @@ section{
 .submit-order-box{
 	margin:50px 0 80px 0;
 }
-.select-addr-box,.edit-addr-box{
+.select-addr-box,.edit-addr-box,.new-addr-box{
 	border:1px solid #e8e8e8;
 	min-height:216px;
 	width:100%;
 }
-.select-addr-box>p,.edit-addr-box>p{
+.select-addr-box>p,.edit-addr-box>p,.new-addr-box>p{
 	height:42px;
 	line-height: 42px;
 	color:#999;
@@ -19,8 +19,11 @@ section{
 	border-bottom:1px solid #e8e8e8;
 	background:#f5f5f5;
 }
-.select-addr-box>div,.edit-addr-box>div{
+.select-addr-box>div,.edit-addr-box>div,.new-addr-box>div{
 	padding:30px;
+}
+.edit-addr-box,.new-addr-box,.select-addr-box,.addr-as-default{
+	display:none;
 }
 .user-addr-default{
 	position: relative;
@@ -37,6 +40,20 @@ section{
 	width:23px;
 	height:23px;
 	background:url("../images/more-img.png") -1px -60px no-repeat;
+}
+.oper-hint{
+	position:fixed;
+	top:5px;
+	left:550px;
+	width:300px;
+	height:40px;
+	line-height:40px;
+	color:#FFF;
+	background-color:#E78170;
+	text-align:center;
+	border-radius:3px;
+	z-index:9999999;
+	display:none;
 }
 .user-addr-default>span{
 	display: inline-block;
@@ -108,6 +125,7 @@ section{
 	height:100%;
 	background: rgba(0,0,0,0.5);
 	z-index:100000;
+	display:none;
 }
 .wait-select-box{
 	position:absolute;
@@ -184,6 +202,10 @@ section{
 	width:32px;
 	height:32px;
 	background:url("../images/close.png") center center no-repeat;
+	cursor:pointer;
+}
+.highlight-select-addr{
+	border:#ad915b solid 2px !important;
 }
 /* 选择默认地址结束 */
 
@@ -217,7 +239,7 @@ section{
 	.area-box>div{
 		position: relative;
 		display:inline-block;
-		width:149px;
+		width:153px;
 		height:28px;
 		margin-right:10px;
 	}
@@ -229,7 +251,7 @@ section{
 		border:1px solid #e8e8e8;
 		padding:2px 5px;
 	}
-	#display-pro,#display-city,#display-regi{
+	#display-pro,#display-city,#display-regi,#display-pro-new,#display-city-new,#display-regi-new{
 		height:28px;
 	}
 	.mer-pro-icon,.mer-city-icon,.mer-area-icon{
@@ -244,7 +266,7 @@ section{
 		border:1px solid #e8e8e8;
 		border-left:none;
 	}
-	#all-provinces,#all-citys,#all-regis{
+	#all-provinces,#all-citys,#all-regis,#all-provinces-new,#all-citys-new,#all-regis-new{
 		position: absolute;
 		top:28px;
 		background:#FFFFFF;
@@ -256,17 +278,17 @@ section{
 		overflow-y: auto;
 		display:none;
 	}
-	#all-provinces>li,#all-citys>li,#all-regis>li{
+	#all-provinces>li,#all-citys>li,#all-regis>li,#all-provinces-new>li,#all-citys-new>li,#all-regis-new>li{
 		line-height: 16px;
 		padding:2px 5px;
 		font-size:12px;
 	}
-	#all-provinces>li:hover,#all-citys>li:hover,#all-regis>li:hover{
+	#all-provinces>li:hover,#all-citys>li:hover,#all-regis>li:hover,#all-provinces-new>li:hover,#all-citys-new>li:hover,#all-regis-new>li:hover{
 		background:#a1c1c0;
 	}
 	.mer-detail-addr>textarea{
 		height:90px;
-		width:474px;
+		width:486px;
 		border:1px solid #e8e8e8;
 		resize: none;
 		margin-left: 92px;
@@ -300,7 +322,7 @@ section{
 	}
 	.user-tel>input{
 		margin:0 3px 0 12px;
-		width:228px;
+		width:241px;
 		height:28px;
 		line-height: 28px;
 		border:1px solid #e8e8e8;
