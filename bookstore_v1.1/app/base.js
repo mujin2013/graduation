@@ -354,6 +354,7 @@
 		$('.shopcar-icon').css('display','inline-block');
 		$('.not-already-login-aside-img-box').css('display','none');
 		$('.not-already-user-box').css('display','none');
+		console.log('我已登录');
 	}else{
 		//当为假时，意味着用户未登录
 		$('.already-login-aside-img-box').css('display','none');
@@ -361,6 +362,7 @@
 		$('.shopcar-icon').css('display','none');
 		$('.not-already-login-aside-img-box').css('display','block');
 		$('.not-already-user-box').css('display','block');
+		console.log('我没有登录');
 	}
 	/*----显示用户名结束--*/
 })();
