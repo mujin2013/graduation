@@ -125,6 +125,7 @@
 			shopCarLen=perOrders.length;
 			$('.shop-num').html(shopCarLen+'<i></i>');
 			$('.shop-big-num>b').html(shopCarLen);
+			time_remain=20;
 		},
 		error:function(){
 			console.log('我没有拿到购物车信息');
@@ -132,7 +133,7 @@
 	});
 	//在搜索框旁边的购物车上，鼠标悬浮时显示购物车里面的内容
 	$('.shopcar-icon').mouseenter(function(){
-		//TODO  从session中获取与购物车相关的信息
+		//从session中获取与购物车相关的信息
 		$.ajax({
 			type:"GET",
 			url:"cartTo-getShopCart.action",
@@ -163,7 +164,7 @@
 						console.log(bTotalPrice);
 						console.log(bNum);
 						$fragment=$("<li><div class='shop-book-img'><a href='book_details.html?bookId="+bId+"' style='background:url("+imgUrl+") center center no-repeat;background-size:contain;'></a></div><div class='shop-book-baseInfo'><a href='javascript:;'>"+bName+"</a><a>x"+bNum+"</a></div><div class='shop-book-price'><span>￥"+bTotalPrice+"</span><i class='deleteCurBook' data-id='"+bId+"'></i></div></li>");
-						$('.shop-book-list').append($fragment);
+						$('.shop-book-list-small').append($fragment);
 					}
 					if(prices.length!=0){
 						for(var index in prices){
@@ -207,6 +208,9 @@
 				if(data.status=='yes'){
 					//删除成功
 					$parElem.remove();
+					shopCarLen--;
+					$('.shop-num').html(shopCarLen+'<i></i>');
+					$('.shop-big-num>b').html(shopCarLen);
 				}
 			}
 		});
@@ -218,16 +222,58 @@
 	});
 	//在划出的导航栏上，鼠标悬浮在购物车上时显示购物车里面的内容
 	$('.shopcar-big-icon').mouseenter(function(){
-		if(shopCarLen!=0){
-			$('.shop-book-big-list-box').css('display','block');
-		}else{
-			var $errorInfo=$('.oper-hint');
-			$errorInfo.html('请先选购书籍！');
-			$errorInfo.slideDown();//错误提示信息缓慢出现
-			setTimeout(function(){
-				$errorInfo.slideUp();
-			},3000);
-		}
+		//从session中获取与购物车相关的信息
+		$.ajax({
+			type:"GET",
+			url:"cartTo-getShopCart.action",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				var perOrders=data.shopCart;
+				if(perOrders.length!=0){
+					$('.shop-book-big-list-box').css('display','block');
+					$('.shop-book-list').children().remove();
+					var $fragment;//用来保存要添加的html片段
+					var imgUrl,
+						bName,
+						bPrice,
+						bNum;
+					var prices=[],
+						totalBookPrice=0;
+					for(var i=0;i<perOrders.length;i++){
+						console.log(perOrders[i]);
+						imgUrl=perOrders[i].book.bookImages[0].imageURL;
+						bName=perOrders[i].book.bookName;
+						bTotalPrice=perOrders[i].itemMoney;
+						bNum=perOrders[i].quantity;
+						bId=perOrders[i].book.bookId;
+						prices.push(bTotalPrice);
+						console.log(imgUrl);
+						console.log(bName);
+						console.log(bTotalPrice);
+						console.log(bNum);
+						$fragment=$("<li><div class='shop-book-img'><a href='book_details.html?bookId="+bId+"' style='background:url("+imgUrl+") center center no-repeat;background-size:contain;'></a></div><div class='shop-book-baseInfo shop-book-big-baseInfo'><a href='javascript:;'>"+bName+"</a><a>x"+bNum+"</a></div><div class='shop-book-price shop-book-big-price'><span>￥"+bTotalPrice+"</span><i class='deleteCurBook' data-id='"+bId+"'></i></div></li>");
+						$('.shop-book-list-big').append($fragment);
+					}
+					if(prices.length!=0){
+						for(var index in prices){
+							totalBookPrice+=parseFloat(prices[index]);
+						}
+					}
+					$('.bookTotalPrice').html('￥'+totalBookPrice);
+				}else{
+					var $errorInfo=$('.oper-hint');
+					$errorInfo.html('请先选购书籍！');
+					$errorInfo.slideDown();//错误提示信息缓慢出现
+					setTimeout(function(){
+						$errorInfo.slideUp();
+					},3000);
+				}
+			},
+			error:function(){
+				console.log('我没有拿到购物车信息');
+			}
+		});
 	});
 	//在搜索框旁边的购物车上，鼠标离开时隐藏购物车里面的内容
 	$('.shopcar-big-icon').mouseleave(function(){
@@ -260,21 +306,44 @@
 			return;
 		}
 		//TODO 在数据库中搜索指定书籍
-/*		$.ajax({
+		$.ajax({
 			type: 'POST',
 			url: 'book-getBookForSearch.action',
-			data: 'book.bookName=测试&pageNum=1&totalPageNo=0',
+			data: 'book.bookName='+keyWord+'&pageNum=1&totalPageNo=0',
 			dataType: 'JSON',
 			success: function(data){
 				console.log(data);
+				if(data.status=='no'){
+					//当没有搜索到指定书籍时
+					window.location.href='no_book_hint.html?bookName='+keyWord;
+				}else{
+					window.location.href='search_book_list.html?bookName='+keyWord;
+				}
 			}
-		});*/
-
-		console.log('我要到数据库中去搜索书籍了')
-		;
+		});
 	});
 	/*--------根据数名搜索书籍结束-----------*/
 
+	/*-----显示倒计时开始------*/
+	var time_remain=sessionStorage.getItem('time_remain');
+	if(time_remain){
+		$('.clearShopCarTime').html(time_remain+'分钟');
+		var timer=setInterval(function(){
+			time_remain--;
+			$('.clearShopCarTime').html(time_remain+'分钟');
+			if(time_remain==0){
+				sessionStorage.removeItem('time_remain');
+				clearInterval(timer);
+				//TODO  向后台发送时间已到
+				$('.shop-book-big-list-box').css('display','none');
+				$('.shop-book-small-list-box').css('display','none');
+				$('.shop-book-list').children().remove();
+				$('.shop-num').html('0<i></i>');
+				$('.shop-big-num>b').html('0');
+			}
+		},3000)
+	}
+	/*-----显示倒计时结束------*/
 
 	/*----显示用户名开始--*/
 	var userIsLogin=sessionStorage.getItem('isLogin');
