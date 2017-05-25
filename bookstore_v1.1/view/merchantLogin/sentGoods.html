@@ -8,16 +8,18 @@
 				<th>数量</th>
 				<th>实收</th>
 				<th>交易时间</th>
+				<th>物流状态</th>
 			</tr>
 		</thead>
 		<tbody class="dealSucc-content">
-			<tr ng-repeat="book in accomplishOrder track by $index">
+			<tr ng-repeat="book in dealingOrder track by $index">
 				<td>{{book.tradeId}}</td>
 				<td class="book-name">{{book.bookName}}</td>
 				<td>{{book.bookPrice}}</td>
 				<td>{{book.bookNum}}</td>
 				<td>{{book.bookTotalPrice}}</td>
 				<td>{{book.tradeTime}}</td>
+				<td class="book-sure"><span ng-click="showLogistics()" data-id="{{book.tradeId}}">查看物流</span></td>
 			</tr>
 			<!--<tr>
 				<td class="book-name">三生花三生三世三生十里桃花</td>
@@ -25,9 +27,18 @@
 				<td>1</td>
 				<td>12</td>
 				<td>2017-04-2</td>
+				<td class="book-sure"><span ng-click="showLogistics()">查看物流</span></td>
 			</tr>-->
 		</tbody>
 	</table>
+	<div class="logistics-mask">
+		<div class="logistics-box">
+			<span class="close-icon" ng-click="closeLogistics()"></span>
+			<div class="logistics-info">
+				<iframe src="./logistics.html" width="100%" height="100%" frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
 	<p class="no-order">暂无订单信息</p>
 </div>
 <style>
@@ -35,6 +46,39 @@
 		width:100%;
 		display:none;
 		text-align: center;
+	}
+	.logistics-mask{
+		position: fixed;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background:rgba(0,0,0,0.4);
+		display:none;
+	}
+	.logistics-box{
+		position: absolute;
+		top:50%;
+		left:50%;
+		width:500px;
+		height:400px;
+		margin-left:-250px;
+		margin-top:-200px;
+		background:#FFF;
+		padding:40px 40px 40px 4px;
+	}
+	.close-icon{
+		position: absolute;
+		top:10px;
+		right:10px;
+		width:24px;
+		height:24px;
+		background:url('./images/close.png') center center no-repeat;
+		cursor:pointer;
+	}
+	.logistics-info{
+		width:100%;
+		height:100%;
 	}
 	.dealSucc-info-box{
 		width:100%;
@@ -66,9 +110,9 @@
 	.book-name{
 		width:110px;
 	}
-	.book-delete>span{
+	.book-sure>span,.book-wating>span{
 		display:inline-block;
-		width:50px;
+		width:100px;
 		height:30px;
 		line-height: 30px;
 		background:#ddbea1;
@@ -76,8 +120,15 @@
 		border:#ddbea1 solid 1px;
 		color:#FFF;
 		cursor:pointer;
+		text-align:center;
 	}
-	.book-delete>span:hover{
+	.book-wating>span{
+		background:none;
+		border-radius:0;
+		border:none;
+		color:#000;
+	}
+	.book-sure>span:hover{
 		background:rgb(221, 161, 161);
 	}
 </style>
