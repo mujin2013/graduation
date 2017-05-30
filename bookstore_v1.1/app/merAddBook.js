@@ -394,6 +394,7 @@
 						break;
 					case 'bookRecom':
 						inputInfo=$scope.book.oneWord;
+						//console.log(inputInfo);
 						if(inputInfo){
 							//当输入信息存在
 							if($scope.reg[2].test(inputInfo)){
@@ -405,6 +406,7 @@
 								$('.recom-hint').html('推荐语不符合要求');
 								$('.recom-hint').css('display','inline-block');
 								$scope.verTrue[6]=false;
+								//console.log('我怎么走的这儿呢');
 							}
 						}else{
 							//当输入信息为空

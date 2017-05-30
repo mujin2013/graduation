@@ -16,7 +16,7 @@
 				<div class="book-info clearfix">
 					<div class="fl">
 						<div class="book-big-img">
-							<img src="./images/bigImg/m00001.jpg" class="demo-img pos-center"/>
+							<img src="{{book.bImgUrls[0]}}" class="demo-img pos-center"/>
 						</div>
 						<ul class="book-small-img clearfix">
 							<li ng-repeat="curimg in book.sImgUrls"><img src="{{curimg}}" ng-mouseover="changeMediImg($event)"/></li>
