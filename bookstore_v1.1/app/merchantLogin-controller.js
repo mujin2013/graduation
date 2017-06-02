@@ -346,7 +346,7 @@ angular.module('merchantLogin-controller',[])
         //与分页相关的数据设定
         $scope.paging={
             totalNum:'',//数据的总条数
-            perNum:10,//每页显示数据的条数
+            perNum:9,//每页显示数据的条数
             totalNav:''//显示的导航数目
         };
         /*-------书籍管理获取基础信息开始-----------*/
