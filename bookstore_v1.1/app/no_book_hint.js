@@ -8,7 +8,7 @@
 	$('.searchBookName').html(bookName);
 	/*----------------与数据相关开始---------------------*/
 	//猜你喜欢开始
-	$(function(){
+	/*$(function(){
 		$.ajax({
 			type:"GET",
 			url:"data/index/weSay.json",
@@ -26,7 +26,7 @@
 				console.log("weSay.json文件未得到");
 			}
 		});
-	});
+	});*/
 	//猜你喜欢结束
 	/*----------------与数据相关结束---------------------*/
 

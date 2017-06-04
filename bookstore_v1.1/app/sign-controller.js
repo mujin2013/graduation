@@ -464,6 +464,12 @@ angular.module('sign-controller',[])
                     }else{
                         //注册失败，请重新注册
                         $window.location.href=$location.absUrl();
+                        var $errorInfo=$('.error-hint');
+                        $errorInfo.html('邮箱不能重复注册！');
+                        $errorInfo.slideDown();//错误提示信息缓慢出现
+                        setTimeout(function(){
+                            $errorInfo.slideUp();
+                        },3000);
                         console.log("注册失败，服务器有问题，请重新注册！");
                     }
                 });

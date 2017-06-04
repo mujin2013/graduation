@@ -1120,12 +1120,19 @@ angular.module('bookList',[])
 			origin='232px 648px',  //前者是单张图片的宽度，后者根据情况调（只是为了将图片的中心点往下移）
 			originImg='232px 680px',
 		//TODO 此处应从数据库中获得相关图片
-			imgs=[
+			/*imgs=[
 				['./images/spotlight/s00005.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00004.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00001.jpg'],
-				['./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg','./images/spotlight/s00003.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00001.jpg'],
-				['./images/spotlight/s00005.jpg','./images/spotlight/s00003.jpg','./images/spotlight/s00003.jpg','./images/spotlight/s00004.jpg','./images/spotlight/s00005.jpg'],
-				['./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg','./images/spotlight/s00003.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00001.jpg'],
-				['./images/spotlight/s00001.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00003.jpg','./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg']
+				['./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg','http://localhost:8080/study/recommend/2-0.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00001.jpg'],
+				['./images/spotlight/s00005.jpg','http://localhost:8080/study/recommend/2-0.jpg','http://localhost:8080/study/recommend/2-0.jpg','./images/spotlight/s00004.jpg','./images/spotlight/s00005.jpg'],
+				['./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg','http://localhost:8080/study/recommend/2-0.jpg','./images/spotlight/s00002.jpg','./images/spotlight/s00001.jpg'],
+				['./images/spotlight/s00001.jpg','./images/spotlight/s00002.jpg','http://localhost:8080/study/recommend/2-0.jpg','./images/spotlight/s00006.jpg','./images/spotlight/s00007.jpg']
+			],*/
+			imgs=[
+				['http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-2.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-3.jpg'],
+				['http://localhost:8080/study/recommend/3-4.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-3.jpg'],
+				['http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-2.jpg','http://localhost:8080/study/recommend/3-0.jpg'],
+				['http://localhost:8080/study/recommend/3-4.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-3.jpg'],
+				['http://localhost:8080/study/recommend/3-3.jpg','http://localhost:8080/study/recommend/3-1.jpg','http://localhost:8080/study/recommend/3-0.jpg','http://localhost:8080/study/recommend/3-4.jpg','http://localhost:8080/study/recommend/3-1.jpg']
 			],
 			imgAll=createImg(imgs),
 			imgArrIndex=0, //记录图片数组的索引

@@ -1,7 +1,7 @@
 (function(){
 	/*----------------与数据相关开始---------------------*/
 	//首页焦点轮播图开始
-	$(function(){
+	/*$(function(){
 		$.ajax({
 			type:"GET",
 			url:"data/index/indexBook.json",
@@ -17,11 +17,11 @@
 				console.log("indexBook.json文件未得到");
 			}
 		});
-	});
+	});*/
 	//首页焦点轮播图结束
 	
 	//新书推荐开始
-	$(function(){
+	/*$(function(){
 		$.ajax({
 			type:"GET",
 			url:"data/index/newBook.json",
@@ -39,7 +39,7 @@
 				console.log("newBook.json文件未得到");
 			}
 		});
-	});
+	});*/
 	//新书推荐结束
 
 	$(function(){
@@ -547,7 +547,7 @@
 
 
 	//大家都在说开始
-	$(function(){
+	/*$(function(){
 		$.ajax({
 			type:"GET",
 			url:"data/index/weSay.json",
@@ -565,7 +565,7 @@
 				console.log("weSay.json文件未得到");
 			}
 		});
-	});
+	});*/
 	//大家都在说结束
 	/*----------------与数据相关结束---------------------*/
 

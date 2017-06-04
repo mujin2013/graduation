@@ -190,7 +190,7 @@ angular.module('submitOrder',[])
                             console.log(response);
                             if(response.status=='yes'){
                                 $('.select-addr-box').css('display','block');
-                                $('.edit-addr-box').css('display','none');
+                                $('.new-addr-box').css('display','none');
                                 $('.oper-hint').html('新建地址成功！');
                                 $('.oper-hint').slideDown();//错误提示信息缓慢出现
                                 setTimeout(function(){

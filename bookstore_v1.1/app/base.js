@@ -121,11 +121,13 @@
 		dataType:"json",
 		success:function(data){
 			console.log(data);
-			var perOrders=data.shopCart;
-			shopCarLen=perOrders.length;
-			$('.shop-num').html(shopCarLen+'<i></i>');
-			$('.shop-big-num>b').html(shopCarLen);
-			time_remain=20;
+			if(data!=undefined){
+				var perOrders=data.shopCart;
+				shopCarLen=perOrders.length;
+				$('.shop-num').html(shopCarLen+'<i></i>');
+				$('.shop-big-num>b').html(shopCarLen);
+				time_remain=20;
+			}
 		},
 		error:function(){
 			console.log('我没有拿到购物车信息');
@@ -359,6 +361,8 @@
 	/*----显示用户名开始--*/
 	var userIsLogin=sessionStorage.getItem('isLogin');
 	if(userIsLogin){
+		var userName='花开半夏';
+		var userImgUrl='../images/userImg.jpg';
 		//当为真时，意味着用户已登录
 		$('.already-login-aside-img-box').css('display','block');
 		$('.already-user-box').css('display','block');
@@ -366,6 +370,22 @@
 		$('.not-already-login-aside-img-box').css('display','none');
 		$('.not-already-user-box').css('display','none');
 		console.log('我已登录');
+		//用户登录后，获得用户的用户名
+		$.ajax({
+			type: 'POST',
+			url: 'user-sellectUser.action?chose=CHOOSE',
+			data: '',
+			dataType: 'JSON',
+			success: function(data){
+				console.log(data);
+				if(data && data.status=='yes'){
+					userName=data.user.userName;
+					userImgUrl=data.user.userImage;
+					$('.user-txt').html(userName);
+					$('.aside-user-img').css({'background-image':'url("'+userImgUrl+'")','background-position':'center center','background-repeat':'no-repeat','background-size':'contain'});
+				}
+			}
+		});
 	}else{
 		//当为假时，意味着用户未登录
 		$('.already-login-aside-img-box').css('display','none');
